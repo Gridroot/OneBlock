@@ -17,9 +17,11 @@
   },
   "dependencies": {
     "bdsx": "file:bdsx",
+    "bdsx-image-maps": "file:bdsx-image-maps",
     "blessed": "^0.1.81",
     "colors": "^1.4.0",
     "follow-redirects": "^1.13.3",
+    "jimp": "^0.16.1",
     "krevent": "^2.2.0",
     "node-html-parser": "^3.0.3",
     "progress": "^2.0.3",

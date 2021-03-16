@@ -5,7 +5,11 @@
   ],
   "compilerOptions": {
     "target": "es2017",
-    "lib": [ "es2017" ],
+    "lib": [ "es2017", "dom" ],
+    "paths": {
+      "bdsx": ["./bdsx/"],
+      "bdsx/*": ["./bdsx/*"]
+    },
     "module": "CommonJS",
     "moduleResolution": "Node",
     "alwaysStrict": true,
