@@ -4,6 +4,7 @@ import { SetTitlePacket, TextPacket } from "bdsx/bds/packets";
 import { command } from "bdsx/command";
 import { int32_t } from "bdsx/nativetype";
 import { nethook } from "bdsx/nethook";
+import { yellow } from "colors";
 import { connected } from "node:process";
 import { ChatColor } from "./api/ChatColor";
 import { CustomForm, sendModalForm, SimpleForm } from "./api/form";
@@ -58,7 +59,7 @@ command.hook.on((cmd,name)=>{
         lv.getScore(`${name}/max`,(max)=>{
             data.forEach((val,idx)=>{
                 if(idx>max){
-                    form.addButton(`${ChatColor.DarkGray}[UNLOCKED] ${val.name} (${val.requiredBlock})`)
+                    form.addButton(`${ChatColor.DarkGray}[LOCKED] ${val.name} (${val.requiredBlock})`)
                 }else{
                     form.addButton(`${val.name} (${val.requiredBlock})`);
                 }
@@ -91,12 +92,13 @@ command.hook.on((cmd,name)=>{
     }
 });
 
-let MaxPercent = new Map<string,number>();
-Array.from(data.keys()).forEach((key,idx)=>{
+let maxPercent = new Map<number,number>();
+data.forEach((lv,idx)=>{
     let cnt = 0;
-    data[key].content.forEach((val)=>cnt+=val.precent);
-    MaxPercent.set(key,cnt);
-})
+    lv.contents.forEach((e)=>{cnt+=e.precent});
+    if(cnt!==100) console.warn(yellow(`${lv.name}'s precent is not a 100%(now ${cnt})`));
+    maxPercent.set(idx,cnt);
+});
 
 function genBlock(pos:VectorXYZ,name:string){
     blockCounter.getScore(name,(cnt)=>{
@@ -115,9 +117,9 @@ function genBlock(pos:VectorXYZ,name:string){
             });
 
             lv.getScore(`${name}`,(now)=>{
-                let cnt= Math.random()*100;
+                let cnt= Math.random() * maxPercent.get(now)!;
 
-                for(let i of data[now].content){
+                for(let i of data[now].contents){
                     cnt=cnt-i.precent;
                     if(cnt<=0){
                         system.executeCommand(`setblock ${pos.x} ${pos.y} ${pos.z} ${i.name} ${i.id!==undefined ? i.id:0}`,()=>{});

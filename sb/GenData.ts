@@ -4,19 +4,19 @@ interface Content {name:string,id?:number,precent:number,entityName?:string};
 interface LV{
     name:string,
     requiredBlock:number,
-    content:Content[],
+    contents:Content[],
 }
 
 export const data:LV[] = [
     {
         name:`새로운 시작`,
         requiredBlock: 0,
-        content:[
+        contents:[
             {
                 name: "log",
                 id: 0,
                 entityName: "chicken",
-                precent: 100
+                precent: 8
             },
             {
                 name: "log",
@@ -61,7 +61,7 @@ export const data:LV[] = [
     {
         name: `얕은 지하`,
         requiredBlock: 200,
-        content:[
+        contents:[
             {
                 name: "stone",
                 precent: 27,
@@ -103,7 +103,7 @@ export const data:LV[] = [
     {
         name: `모래 사막`,
         requiredBlock: 300,
-        content:[
+        contents:[
             {
                 name: "sand",
                 precent: 40,
@@ -137,7 +137,7 @@ export const data:LV[] = [
     {
         name: `심층 지하`,
         requiredBlock: 500,
-        content:[
+        contents:[
             {
                 name: "stone",
                 precent: 21,
@@ -197,7 +197,7 @@ export const data:LV[] = [
     {
         name: `HELL`,
         requiredBlock: 800,
-        content: [
+        contents: [
             {
                 name: "netherrack",
                 precent: 15,
