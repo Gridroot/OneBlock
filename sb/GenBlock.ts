@@ -68,7 +68,7 @@ command.hook.on((cmd,name)=>{
                 if(e.formData===null) return;
                 if(e.formData>max){
                     let pk = TextPacket.create();
-                    pk.message = `${ChatColor.DarkRed}This Generator is UNLOCKED`;
+                    pk.message = `${ChatColor.DarkRed}This Generator is sLOCKED`;
                     pk.sendTo(NiByName.get(name)!);
                     pk.dispose();
                 }else{
